@@ -36,6 +36,7 @@
       "/casper/vmlinuz initrd=/casper/initrd.lz",
       " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/mint-allinone.seed",
       " boot=casper automatic-ubiquity quiet splash",
+      " locale=en_US keyboard-configuration/modelcode=SKIP",
       " -- ",
       "<enter>"
     ],
@@ -45,76 +46,6 @@
       "memsize": "1024",
       "numvcpus": "2"
     }
-  },
-  {
-    "vm_name": "mint-cinnamon",
-    "type": "virtualbox-iso",
-    "http_directory": "http",
-    "iso_url": "{{ user `iso_url` }}",
-    "iso_checksum": "{{ user `iso_checksum` }}",
-    "iso_checksum_type": "sha1",
-    "guest_os_type": "Ubuntu_64",
-    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-    "virtualbox_version_file": ".vbox_version",
-    "headless": "{{ user `headless` }}",
-    "ssh_username": "{{ user `ssh_username` }}",
-    "ssh_password": "{{ user `ssh_password` }}",
-    "ssh_wait_timeout": "10000s",
-    "boot_command": [
-      "<esc><wait><esc><wait>",
-      "/vmlinuz initrd=/initrd.img ",
-      " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/mint-allinone.seed",
-      " boot=casper automatic-ubiquity quiet splash",
-      " -- ",
-      "<enter>"
-    ],
-    "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-    "disk_size": 40960,
-    "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--memory", "1024"],
-      ["modifyvm", "{{.Name}}", "--cpus", "2"]
-    ]
-  },
-  {
-    "vm_name": "ubuntu1404",
-    "type": "parallels-iso",
-    "http_directory": "http",
-    "iso_url": "{{ user `iso_url` }}",
-    "iso_checksum": "{{ user `iso_checksum` }}",
-    "iso_checksum_type": "sha1",
-    "parallels_tools_flavor": "lin",
-    "guest_os_type": "ubuntu",
-    "prlctl_version_file": ".prlctl_version",
-    "ssh_username": "{{ user `ssh_username` }}",
-    "ssh_password": "{{ user `ssh_password` }}",
-    "ssh_wait_timeout": "10000s",
-    "boot_command": [
-      "<esc><esc><enter><wait>",
-      "/install/vmlinuz auto",
-      " console-setup/ask_detect=false",
-      " console-setup/layoutcode=us",
-      " console-setup/modelcode=pc105",
-      " debconf/frontend=noninteractive",
-      " debian-installer=en_US",
-      " fb=false",
-      " initrd=/install/initrd.gz",
-      " kbd-chooser/method=us",
-      " keyboard-configuration/layout=USA",
-      " keyboard-configuration/variant=USA",
-      " locale=en_US",
-      " netcfg/get_domain=vm",
-      " netcfg/get_hostname=vagrant",
-      " noapic" ,
-      " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-      " -- ",
-      "<enter>"
-    ],
-    "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-    "disk_size": 40960,
-    "prlctl": [
-      ["set", "{{.Name}}", "--memsize", "1024"],
-      ["set", "{{.Name}}", "--cpus", "2"]
-    ]
   }],
   "provisioners": [{
     "type": "shell",
