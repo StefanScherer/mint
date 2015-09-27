@@ -1,5 +1,5 @@
 #Step 1
-d-i debian-installer/locale string de_DE
+d-i debian-installer/locale string en_US
 
 #Step 2
 d-i time/zone string Europe/Berlin
@@ -21,8 +21,10 @@ d-i passwd/username string vagrant
 d-i passwd/user-password password vagrant
 d-i passwd/user-password-again password vagrant
 d-i user-setup/allow-password-weak boolean true
-d-i netcfg/get_hostname string hostname
+d-i netcfg/get_hostname string vagrant
 d-i passwd/auto-login boolean true
+
+d-i pkgsel/include string openssh-server ntp curl nfs-common linux-headers-$(uname -r) build-essential perl dkms
 
 #if you want to start commands after the installation
 ubiquity ubiquity/success_command string apt-get install openssh-server && /etc/init.d/ssh restart
@@ -30,3 +32,7 @@ ubiquity ubiquity/success_command string apt-get install openssh-server && /etc/
 #Step 6
 ubiquity ubiquity/summary note
 ubiquity ubiquity/reboot boolean true
+
+languagechooser/language-name: English
+countrychooser/shortlist: US
+localechooser/supported-locales: en_US.UTF-8
