@@ -76,6 +76,6 @@
   "post-processors": [{
     "type": "vagrant",
     "keep_input_artifact": false,
-    "output": "mint_cinnamon_17.2_{{.Provider}}.box"
+    "output": "mint-cinnamon_17.2_{{.Provider}}.box"
   }]
 }
