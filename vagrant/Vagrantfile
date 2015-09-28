@@ -1,0 +1,28 @@
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define "mint" do |config|
+    config.vm.box = "mint"
+    config.vm.hostname = "mint"
+
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      config.vm.provider provider do |vmware, override|
+        vmware.gui = true
+        vmware.vmx["memsize"] = "4096"
+        vmware.vmx["numvcpus"] = "2"
+        vmware.vmx["mks.enable3d"] = "TRUE"
+      end
+    end
+
+    config.vm.provider :virtualbox do |vb|
+      vb.gui = true
+      vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      vb.customize ["modifyvm", :id, "--vram", "128"]
+      # vb.customize ["modifyvm", :id, "--monitorcount", "2"]
+      vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    end
+  end
+end
