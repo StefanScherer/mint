@@ -9,11 +9,16 @@ d-i console-setup/layoutcode string de
 
 #Step 4
 d-i partman-auto/disk string /dev/sda
-d-i partman-auto/method string regular
 d-i partman-auto/choose_recipe select atomic
 d-i partman/confirm_write_new_label boolean true
 d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
+d-i partman-auto-lvm/guided_size string max
+d-i partman-auto/method string lvm
+d-i partman-lvm/confirm boolean true
+d-i partman-lvm/confirm_nooverwrite boolean true
+d-i partman-lvm/device_remove_lvm boolean true
+d-i partman/confirm_nooverwrite boolean true
 d-i grub-installer/only_debian boolean true
 d-i grub-installer/with_other_os boolean true
 
