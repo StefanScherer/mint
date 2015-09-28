@@ -76,6 +76,6 @@
   "post-processors": [{
     "type": "vagrant",
     "keep_input_artifact": false,
-    "output": "ubuntu1404_{{.Provider}}.box"
+    "output": "mint_cinnamon_17.2_{{.Provider}}.box"
   }]
 }
