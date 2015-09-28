@@ -35,8 +35,7 @@
       "<esc><wait><esc><wait>",
       "/casper/vmlinuz initrd=/casper/initrd.lz",
       " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/mint-allinone.seed",
-      " boot=casper automatic-ubiquity quiet splash",
-      " locale=en_US keyboard-configuration/modelcode=SKIP",
+      " boot=casper automatic-ubiquity quiet splash noprompt",
       " -- ",
       "<enter>"
     ],
